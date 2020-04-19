@@ -1,0 +1,14 @@
+# /lib/systemd/system
+[Unit]
+Description=PythonMQTT
+After=multi-user.target
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/bin/PythonMQTT
+ExecStart=/usr/bin/python3 /usr/local/bin/PythonMQTT/subscribe.py
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
