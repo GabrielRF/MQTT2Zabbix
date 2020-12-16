@@ -1,12 +1,12 @@
 # /lib/systemd/system
 [Unit]
-Description=PythonMQTT
+Description=MQTT2Zabbix
 After=multi-user.target
 
 [Service]
 Type=simple
-WorkingDirectory=/usr/local/bin/PythonMQTT
-ExecStart=/usr/bin/python3 /usr/local/bin/PythonMQTT/subscribe.py
+WorkingDirectory=/usr/local/bin/MQTT2Zabbix
+ExecStart=/usr/bin/python3 MQTT2Zabbix/Mqtt2Zabbix.py
 Restart=always
 RestartSec=60
 

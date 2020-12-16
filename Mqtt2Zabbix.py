@@ -2,17 +2,18 @@ import paho.mqtt.client as mqtt
 from pyzabbix import ZabbixMetric, ZabbixSender
 
 ZabbixServer=
-ZabbixPort=
+ZabbixPort= # Default: 10051
 MqttServer=
-MqttPort=
+MqttPort= # Default: 1883
 MqttUser=
 MqttPassword=
+MqttClient = # Must be unique
 
 def on_connect(client, userdata, flags, rc):
     client.subscribe("+")
 
 def on_message(client, userdata, msg):
-    print(msg.topic+" -  "+str(msg.payload.decode('utf-8')))
+    print(msg.topic+" - "+str(msg.payload.decode('utf-8')))
 
     packet = [
         ZabbixMetric(str(msg.topic).split('.')[0], str(msg.topic).split('.')[1], str(msg.payload.decode('utf-8'))),
@@ -22,7 +23,7 @@ def on_message(client, userdata, msg):
     print(result)
 
 
-mqttclient = mqtt.Client(client_id='ZabbixServer')
+mqttclient = mqtt.Client(client_id=MqttClient)
 mqttclient.on_connect = on_connect
 mqttclient.on_message = on_message
 
